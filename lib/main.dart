@@ -42,7 +42,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
         title: new Text("STUDENT RECIPES",
             textAlign: TextAlign.center,
             style: new TextStyle(fontStyle: FontStyle.italic)),
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.blueGrey,
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.info),
           onPressed: () {},
