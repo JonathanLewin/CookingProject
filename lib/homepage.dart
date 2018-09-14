@@ -11,14 +11,28 @@ class HomepagePage extends StatefulWidget {
 class HomepagePageState extends State<HomepagePage> {
   @override
   Widget build(BuildContext context) {
-    int index = 0;
+    //int index = 0;
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
 
-    String text;
+    String _text;
 
-    final TextEditingController _controller = new TextEditingController();
+    void onChanged(String item){
+      //setState(() {
+        _text = item;        
+      //});
+    }
+
+    void onPressed(){
+      for(int index = 0; index < _data.length; index++){
+        if(_text == _data[index].foodname){
+          print(_text);
+        }
+      }
+    }
+
+    final _controller = new TextEditingController();
 
     return new Container(
       padding: new EdgeInsets.all(20.0),
@@ -26,18 +40,21 @@ class HomepagePageState extends State<HomepagePage> {
         children: <Widget>[
           new TextField(
             keyboardType: TextInputType.text,
-            autofocus: true,
-            autocorrect: true,
+            //autofocus: true,
+            //controller: _controller,
+            //autocorrect: true,
             onChanged: (String item) {
-              setState(() {
-                text = item;
-                new Text(_controller.text);
-              });
+                onChanged(item);
+                //print('gets changed');
             },
             decoration: new InputDecoration(
               hintText: 'Search for Recipe',
               icon: new Icon(Icons.search),
             ),
+          ),
+          new IconButton(
+            icon: new Icon(Icons.arrow_right),
+            onPressed: () {onPressed();},
           )
         ],
       ),
