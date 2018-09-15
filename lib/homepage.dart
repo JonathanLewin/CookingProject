@@ -12,9 +12,9 @@ class HomepagePageState extends State<HomepagePage> {
   String _text;
 
   final TextEditingController _filter = new TextEditingController();
-  List searchRecipesArray = new List();
-
-  //int count = 0;
+  List searchRecipesArrayname = new List();
+  List searchRecipesArraydescription = new List();
+  //List searchRecipesArrayurl = new List();
 
   void onChanged(String item) {
     _text = item;
@@ -22,30 +22,36 @@ class HomepagePageState extends State<HomepagePage> {
 
   @override
   Widget build(BuildContext context) {
-    //int index = 0;
+    int index = 0;
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
 
     void onPressedd() {
-      //List<Widget> array = [];
-    if (!(_text.isEmpty)){
-      List temp = new List();
-      for (int index = 0; index < _data.length; index++) {
-        if (_text.toLowerCase() == _data[index].foodname.toLowerCase()) {
-          print(_text);
-          temp.add(_data[index].foodname);
-          print(searchRecipesArray);
+
+      if (!(_text.isEmpty)) {
+        List temp = new List();
+        List temptwo = new List();
+        //List tempthree = new List();
+        for (int index = 0; index < _data.length; index++) {
+          if (_text.toLowerCase() == _data[index].foodname.toLowerCase()) {
+            print(_text);
+            //tempthree.add(_data[index].url);
+            temp.add(_data[index].foodname);
+            temptwo.add(_data[index].fooddescription);
+            print(searchRecipesArrayname);
+            //_filter.clear();
+          }
           _filter.clear();
-          //count++;
         }
+        searchRecipesArrayname = temp;
+        searchRecipesArraydescription = temptwo;
+        //searchRecipesArrayurl = tempthree;
       }
-      searchRecipesArray = temp;
-    }
     }
 
     return new Container(
-      padding: new EdgeInsets.all(20.0),
+      padding: new EdgeInsets.all(40.0),
       child: new Column(
         children: <Widget>[
           new TextField(
@@ -69,19 +75,21 @@ class HomepagePageState extends State<HomepagePage> {
                   onPressedd();
                   print('yes');
                 });
-                //onPressedd();
-                //print('yes');
               }),
           new ListView.builder(
-            itemCount: searchRecipesArray == null ? 0 : searchRecipesArray.length,
+            itemCount:
+                searchRecipesArrayname == null ? 0 : searchRecipesArrayname.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ListTile(
-                title: new Text(searchRecipesArray[index]),
-                onTap: () => print(searchRecipesArray[index]),
+                contentPadding: new EdgeInsets.all(10.0),
+                title: new Text(searchRecipesArrayname[index]),
+                subtitle: new Text(searchRecipesArraydescription[index]),
+                //title: new Image.asset(searchRecipesArrayurl[index], fit: BoxFit.cover, height: 100.0, width: 170.0),
+                onTap: () => print(searchRecipesArrayname[index]),
               );
             },
-          )
+          ),
         ],
       ),
     );
