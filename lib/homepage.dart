@@ -51,7 +51,7 @@ class HomepagePageState extends State<HomepagePage> {
     }
 
     return new Container(
-      padding: new EdgeInsets.all(40.0),
+      padding: new EdgeInsets.all(20.0),
       child: new Column(
         children: <Widget>[
           new TextField(
@@ -82,7 +82,6 @@ class HomepagePageState extends State<HomepagePage> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ListTile(
-                contentPadding: new EdgeInsets.all(10.0),
                 title: new Text(searchRecipesArrayname[index]),
                 subtitle: new Text(searchRecipesArraydescription[index]),
                 //title: new Image.asset(searchRecipesArrayurl[index], fit: BoxFit.cover, height: 100.0, width: 170.0),
