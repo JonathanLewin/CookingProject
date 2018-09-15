@@ -51,7 +51,7 @@ class HomepagePageState extends State<HomepagePage> {
     }
 
     return new Container(
-      padding: new EdgeInsets.all(20.0),
+      padding: new EdgeInsets.all(25.0),
       child: new Column(
         children: <Widget>[
           new TextField(
@@ -64,12 +64,17 @@ class HomepagePageState extends State<HomepagePage> {
               //print('gets changed');
             },
             decoration: new InputDecoration(
-              hintText: 'Search for Recipe',
+              hintText: 'Search for a Recipe',
               icon: new Icon(Icons.search),
             ),
           ),
-          new IconButton(
-              icon: new Icon(Icons.arrow_right),
+          new RaisedButton(
+              padding: new EdgeInsets.all(11.0),
+              child: new Text('Find Recipe!'),
+              color: Colors.deepOrange,
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25.0)),
+              highlightElevation: 50.0,
+              elevation: 4.0,
               onPressed: () {
                 setState(() {
                   onPressedd();
