@@ -9,6 +9,14 @@ class HomepagePage extends StatefulWidget {
 }
 
 class HomepagePageState extends State<HomepagePage> {
+  String _text;
+
+  List<String> searchRecipesArray = new List<String>();
+
+  void onChanged(String item) {
+    _text = item;
+  }
+
   @override
   Widget build(BuildContext context) {
     //int index = 0;
@@ -16,23 +24,16 @@ class HomepagePageState extends State<HomepagePage> {
     test = new DataClass();
     List<Data> _data = test.getList();
 
-    String _text;
-
-    void onChanged(String item){
-      //setState(() {
-        _text = item;        
-      //});
-    }
-
-    void onPressed(){
-      for(int index = 0; index < _data.length; index++){
-        if(_text == _data[index].foodname){
+    void onPressedd() {
+      //List<Widget> array = [];
+      for (int index = 0; index < _data.length; index++) {
+        if (_text == _data[index].foodname) {
           print(_text);
+          searchRecipesArray.add(_data[index].foodname);
+          print(searchRecipesArray);
         }
       }
     }
-
-    final _controller = new TextEditingController();
 
     return new Container(
       padding: new EdgeInsets.all(20.0),
@@ -44,8 +45,8 @@ class HomepagePageState extends State<HomepagePage> {
             //controller: _controller,
             //autocorrect: true,
             onChanged: (String item) {
-                onChanged(item);
-                //print('gets changed');
+              onChanged(item);
+              //print('gets changed');
             },
             decoration: new InputDecoration(
               hintText: 'Search for Recipe',
@@ -53,106 +54,97 @@ class HomepagePageState extends State<HomepagePage> {
             ),
           ),
           new IconButton(
-            icon: new Icon(Icons.arrow_right),
-            onPressed: () {onPressed();},
+              icon: new Icon(Icons.arrow_right),
+              onPressed: () {
+                setState(() {
+                  onPressedd();
+                  print('yes');
+                });
+                //onPressedd();
+                //print('yes');
+              }),
+          new ListView.builder(
+            itemCount: searchRecipesArray.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: new Text(searchRecipesArray[index]),
+              );
+            },
           )
         ],
       ),
     );
- }
+  }
 }
 
+// List<DropdownMenuItem<String>> listdrop = [];
 
+// List<String> drop = [
+//   _data[0].foodname,
+//   _data[1].foodname,
+//   _data[2].foodname,
+//   _data[1].foodname,
+//   _data[0].foodname
+// ];
 
+// String selected;
 
+// void loadData() {
+//   listdrop = [];
+//   listdrop = drop
+//       .map((val) => new DropdownMenuItem<String>(
+//             child: new Text(val),
+//             value: val,
+//           ))
+//       .toList();
 
+//   // listdrop.add(new DropdownMenuItem(
+//   //   child: new Text(_data[index].foodname),
+//   //   value: 'one',
+//   // ));
+//   // index++;
+//   // listdrop.add(new DropdownMenuItem(
+//   //   child: new Text(_data[index].foodname),
+//   //   value: 'two',
+//   // ));
+//   // index++;
+//   // listdrop.add(new DropdownMenuItem(
+//   //   child: new Text(_data[index].foodname),
+//   //   value: 'three',
+//   // ));
+// }
 
+// loadData();
+// return new Scaffold(
+//     body: new Row(
+//   crossAxisAlignment: CrossAxisAlignment.start,
+//   children: <Widget>[
+//     new Container(
+//       padding: new EdgeInsets.symmetric(vertical: 20.0, horizontal: 45.0),
+//       child: new Column(
+//         children: <Widget>[
+//           new DropdownButton(
+//             value: selected,
+//             items: listdrop,
+//             hint: new Text(
+//               'Filter',
+//               style: TextStyle(
+//                   fontSize: 20.0,
+//                   color: Colors.black,
+//                   fontStyle: FontStyle.italic),
+//             ),
+//             elevation: 13,
+//             iconSize: 40.0,
+//             onChanged: (value) {
+//               selected = value;
+//               setState(){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // List<DropdownMenuItem<String>> listdrop = [];
-
-    // List<String> drop = [
-    //   _data[0].foodname,
-    //   _data[1].foodname,
-    //   _data[2].foodname,
-    //   _data[1].foodname,
-    //   _data[0].foodname
-    // ];
-    
-    // String selected;
-
-    // void loadData() {
-    //   listdrop = [];
-    //   listdrop = drop
-    //       .map((val) => new DropdownMenuItem<String>(
-    //             child: new Text(val),
-    //             value: val,
-    //           ))
-    //       .toList();
-
-    //   // listdrop.add(new DropdownMenuItem(
-    //   //   child: new Text(_data[index].foodname),
-    //   //   value: 'one',
-    //   // ));
-    //   // index++;
-    //   // listdrop.add(new DropdownMenuItem(
-    //   //   child: new Text(_data[index].foodname),
-    //   //   value: 'two',
-    //   // ));
-    //   // index++;
-    //   // listdrop.add(new DropdownMenuItem(
-    //   //   child: new Text(_data[index].foodname),
-    //   //   value: 'three',
-    //   // ));
-    // }
-
-    // loadData();
-    // return new Scaffold(
-    //     body: new Row(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: <Widget>[
-    //     new Container(
-    //       padding: new EdgeInsets.symmetric(vertical: 20.0, horizontal: 45.0),
-    //       child: new Column(
-    //         children: <Widget>[
-    //           new DropdownButton(
-    //             value: selected,
-    //             items: listdrop,
-    //             hint: new Text(
-    //               'Filter',
-    //               style: TextStyle(
-    //                   fontSize: 20.0,
-    //                   color: Colors.black,
-    //                   fontStyle: FontStyle.italic),
-    //             ),
-    //             elevation: 13,
-    //             iconSize: 40.0,
-    //             onChanged: (value) {
-    //               selected = value;
-    //               setState(){
-
-    //               }
-    //             }
-    //           ),
-    //         ],
-    //       ),
-    //     )
-    //   ],
-    // ));
- 
+//               }
+//             }
+//           ),
+//         ],
+//       ),
+//     )
+//   ],
+// ));
