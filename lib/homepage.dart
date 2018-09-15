@@ -11,7 +11,10 @@ class HomepagePage extends StatefulWidget {
 class HomepagePageState extends State<HomepagePage> {
   String _text;
 
-  List<String> searchRecipesArray = new List<String>();
+  final TextEditingController _filter = new TextEditingController();
+  List searchRecipesArray = new List();
+
+  //int count = 0;
 
   void onChanged(String item) {
     _text = item;
@@ -26,13 +29,19 @@ class HomepagePageState extends State<HomepagePage> {
 
     void onPressedd() {
       //List<Widget> array = [];
+    if (!(_text.isEmpty)){
+      List temp = new List();
       for (int index = 0; index < _data.length; index++) {
-        if (_text == _data[index].foodname) {
+        if (_text.toLowerCase() == _data[index].foodname.toLowerCase()) {
           print(_text);
-          searchRecipesArray.add(_data[index].foodname);
+          temp.add(_data[index].foodname);
           print(searchRecipesArray);
+          _filter.clear();
+          //count++;
         }
       }
+      searchRecipesArray = temp;
+    }
     }
 
     return new Container(
@@ -42,8 +51,8 @@ class HomepagePageState extends State<HomepagePage> {
           new TextField(
             keyboardType: TextInputType.text,
             //autofocus: true,
-            //controller: _controller,
-            //autocorrect: true,
+            controller: _filter,
+            autocorrect: true,
             onChanged: (String item) {
               onChanged(item);
               //print('gets changed');
@@ -64,11 +73,12 @@ class HomepagePageState extends State<HomepagePage> {
                 //print('yes');
               }),
           new ListView.builder(
-            itemCount: searchRecipesArray.length,
+            itemCount: searchRecipesArray == null ? 0 : searchRecipesArray.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return ListTile(
                 title: new Text(searchRecipesArray[index]),
+                onTap: () => print(searchRecipesArray[index]),
               );
             },
           )
