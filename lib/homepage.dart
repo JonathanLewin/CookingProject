@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './sidebarpages.dart';
+import './ingredientspage.dart';
 
 class HomepagePage extends StatefulWidget {
   @override
@@ -14,7 +15,94 @@ class HomepagePageState extends State<HomepagePage> {
   final TextEditingController _filter = new TextEditingController();
   List searchRecipesArrayname = new List();
   List searchRecipesArraydescription = new List();
-  //List searchRecipesArrayurl = new List();
+  List searchRecipesArrayurl = new List();
+  List searchRecipesArraycooking = new List();
+  List nosuggestion = new List();
+
+  Widget _dialogbuilder(BuildContext context, List t) {
+    DataClass test;
+    test = new DataClass();
+    List<Data> _data = test.getList();
+    int index = 0;
+
+    return SimpleDialog(
+      children: [
+        new Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding:
+                  new EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
+              child: new Text(
+                'Ingredients you will need: ',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: new EdgeInsets.all(15.0),
+              child: new Text(
+                t[index].ingredients,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14.0),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Wrap(
+                spacing: 60.0,
+                children: [
+                  new FlatButton.icon(
+                    icon: new Icon(Icons.star),
+                    onPressed: () {},
+                    // Navigator.push(
+                    //       context,
+                    //       new MaterialPageRoute(
+                    //         builder: (BuildContext context) => new HomepagePage(
+                    //               data.url,
+                    //               data.foodname,
+                    //               data.fooddescription,
+                    //               data.cookingtime,
+                    //             ),
+                    //       ),
+                    //     ),
+                    label: new Text(
+                      'Save me ',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                  new FlatButton.icon(
+                    icon: new Icon(Icons.restaurant),
+                    // onPressed: () => Navigator.of(context).push(
+                    //       new MaterialPageRoute(
+                    //         builder: (BuildContext context) => new Ingredients(
+                    // 'HOW TO MAKE ' + data.foodname,
+                    // data.stepone,
+                    // data.steptwo,
+                    // data.stepthree,
+                    // data.stepfour,
+                    // data.stepfive,
+                    // data.steponetime,
+                    // data.steptwotime,
+                    // data.stepthreetime,
+                    // data.stepfourtime,
+                    // data.stepfivetime,
+                    //),
+                    //),
+                    //),
+                    label: new Text(
+                      'Start Cooking! ',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   void onChanged(String item) {
     _text = item;
@@ -28,17 +116,19 @@ class HomepagePageState extends State<HomepagePage> {
     List<Data> _data = test.getList();
 
     void onPressedd() {
-
       if (!(_text.isEmpty)) {
         List temp = new List();
         List temptwo = new List();
-        //List tempthree = new List();
+        List tempthree = new List();
+        List tempfour = new List();
         for (int index = 0; index < _data.length; index++) {
           if (_text.toLowerCase() == _data[index].foodname.toLowerCase()) {
             print(_text);
             //tempthree.add(_data[index].url);
             temp.add(_data[index].foodname);
             temptwo.add(_data[index].fooddescription);
+            tempthree.add(_data[index].url);
+            tempfour.add(_data[index].cookingtime);
             print(searchRecipesArrayname);
             //_filter.clear();
           }
@@ -46,7 +136,8 @@ class HomepagePageState extends State<HomepagePage> {
         }
         searchRecipesArrayname = temp;
         searchRecipesArraydescription = temptwo;
-        //searchRecipesArrayurl = tempthree;
+        searchRecipesArrayurl = tempthree;
+        searchRecipesArraycooking = tempfour;
       }
     }
 
@@ -72,7 +163,8 @@ class HomepagePageState extends State<HomepagePage> {
               padding: new EdgeInsets.all(11.0),
               child: new Text('Find Recipe!'),
               color: Colors.deepOrange,
-              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25.0)),
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(25.0)),
               highlightElevation: 50.0,
               elevation: 4.0,
               onPressed: () {
@@ -82,21 +174,66 @@ class HomepagePageState extends State<HomepagePage> {
                 });
               }),
           new ListView.builder(
-            itemCount:
-                searchRecipesArrayname == null ? 0 : searchRecipesArrayname.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: new Text(searchRecipesArrayname[index]),
-                subtitle: new Text(searchRecipesArraydescription[index]),
-                //title: new Image.asset(searchRecipesArrayurl[index], fit: BoxFit.cover, height: 100.0, width: 170.0),
-                onTap: () => print(searchRecipesArrayname[index]),
-              );
-            },
-          ),
+              itemCount: searchRecipesArrayname == null
+                  ? 0
+                  : searchRecipesArrayname.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return new SingleChildScrollView(
+                  child: new Container(
+                    padding: new EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 45.0),
+                    child: new Column(
+                      children: <Widget>[
+                        new Image.asset(searchRecipesArrayurl[index],
+                            fit: BoxFit.cover, height: 200.0, width: 370.0),
+                        new SizedBox(height: 8.0),
+                        new Text(searchRecipesArrayname[index],
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic)),
+                        new SizedBox(height: 8.0),
+                        new Text(searchRecipesArraydescription[index],
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                fontSize: 14.0, fontStyle: FontStyle.italic)),
+                        new SizedBox(height: 8.0),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Wrap(
+                            spacing: 20.0,
+                            children: [
+                              new Text(
+                                'Cooking Time: ' +
+                                    searchRecipesArraycooking[index],
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
         ],
       ),
     );
+
+    //title: new Text(searchRecipesArrayname[index]),
+    //subtitle: new Text(searchRecipesArraydescription[index]),
+    //onTap: () => showDialog(
+    //context: context,
+    //builder: (context) => _dialogbuilder(context, searchRecipesArrayname[index]),
+    //             ),
+    //           );
+    //         },
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
 
