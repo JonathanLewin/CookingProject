@@ -53,7 +53,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
           tabs: <Tab>[
             new Tab(child: new Text('Popular', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))),
             new Tab(icon: new Icon(Icons.home)),
-            new Tab(child: new Text('Our Favoruites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+            new Tab(child: new Text('Our Favourites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
             ),],
         ),
       ),

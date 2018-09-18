@@ -19,7 +19,7 @@ class HomepagePageState extends State<HomepagePage> {
   List searchRecipesArraycooking = new List();
   List nosuggestion = new List();
 
-  Widget _dialogbuilder(BuildContext context, List t) {
+  Widget _dialogbuilder(BuildContext context, Data data) {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
@@ -42,7 +42,7 @@ class HomepagePageState extends State<HomepagePage> {
             Padding(
               padding: new EdgeInsets.all(15.0),
               child: new Text(
-                t[index].ingredients,
+                data.ingredients,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14.0),
               ),
@@ -141,87 +141,95 @@ class HomepagePageState extends State<HomepagePage> {
       }
     }
 
-    return new SingleChildScrollView(
-      child: new Container(
-        padding: new EdgeInsets.all(25.0),
-        child: new Column(
-          children: <Widget>[
-            new TextField(
-              keyboardType: TextInputType.text,
-              maxLength: null,
-              maxLengthEnforced: false,
-              //autofocus: true,
-              controller: _filter,
-              autocorrect: true,
-              onChanged: (String item) {
-                onChanged(item);
-                //print('gets changed');
-              },
-              decoration: new InputDecoration(
-                hintText: 'Search for a Recipe',
-                icon: new Icon(Icons.search),
+    return new GestureDetector(
+      onTap: () => showDialog(
+            context: context,
+            builder: (context) => _dialogbuilder(context, _data[index]),
+          ),
+      child: new SingleChildScrollView(
+        child: new Container(
+          padding: new EdgeInsets.all(25.0),
+          child: new Column(
+            children: <Widget>[
+              new TextField(
+                keyboardType: TextInputType.text,
+                maxLength: null,
+                maxLengthEnforced: false,
+                //autofocus: true,
+                controller: _filter,
+                autocorrect: true,
+                onChanged: (String item) {
+                  onChanged(item);
+                  //print('gets changed');
+                },
+                decoration: new InputDecoration(
+                  hintText: 'Search for a Recipe',
+                  icon: new Icon(Icons.search),
+                ),
               ),
-            ),
-            new RaisedButton(
-                padding: new EdgeInsets.all(11.0),
-                child: new Text('Find Recipe!'),
-                color: Colors.deepOrange,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(25.0)),
-                highlightElevation: 50.0,
-                elevation: 4.0,
-                onPressed: () {
-                  setState(() {
-                    onPressedd();
-                    print('yes');
-                  });
-                }),
-            new ListView.builder(
-                itemCount: searchRecipesArrayname == null
-                    ? 0
-                    : searchRecipesArrayname.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return new SingleChildScrollView(
-                    child: new Container(
-                      padding: new EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 45.0),
-                      child: new Column(
-                        children: <Widget>[
-                          new Image.asset(searchRecipesArrayurl[index],
-                              fit: BoxFit.cover, height: 200.0, width: 370.0),
-                          new SizedBox(height: 8.0),
-                          new Text(searchRecipesArrayname[index],
-                              textAlign: TextAlign.center,
-                              style: new TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic)),
-                          new SizedBox(height: 8.0),
-                          new Text(searchRecipesArraydescription[index],
-                              textAlign: TextAlign.center,
-                              style: new TextStyle(
-                                  fontSize: 14.0, fontStyle: FontStyle.italic)),
-                          new SizedBox(height: 8.0),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Wrap(
-                              spacing: 20.0,
-                              children: [
-                                new Text(
-                                  'Cooking Time: ' +
-                                      searchRecipesArraycooking[index],
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ],
+              new RaisedButton(
+                  padding: new EdgeInsets.all(11.0),
+                  child: new Text('Find Recipe!'),
+                  color: Colors.deepOrange,
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(25.0)),
+                  highlightElevation: 50.0,
+                  elevation: 4.0,
+                  onPressed: () {
+                    setState(() {
+                      onPressedd();
+                      print('yes');
+                    });
+                  }),
+              new ListView.builder(
+                  itemCount: searchRecipesArrayname == null
+                      ? 0
+                      : searchRecipesArrayname.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return new SingleChildScrollView(
+                      child: new Container(
+                        padding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 45.0),
+                        child: new Column(
+                          children: <Widget>[
+                            new Image.asset(searchRecipesArrayurl[index],
+                                fit: BoxFit.cover, height: 200.0, width: 370.0),
+                            new SizedBox(height: 8.0),
+                            new Text(searchRecipesArrayname[index],
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic)),
+                            new SizedBox(height: 8.0),
+                            new Text(searchRecipesArraydescription[index],
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                    fontSize: 14.0,
+                                    fontStyle: FontStyle.italic)),
+                            new SizedBox(height: 8.0),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Wrap(
+                                spacing: 20.0,
+                                children: [
+                                  new Text(
+                                    'Cooking Time: ' +
+                                        searchRecipesArraycooking[index],
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
-          ],
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );
