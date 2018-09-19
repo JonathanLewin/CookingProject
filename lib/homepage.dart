@@ -77,7 +77,7 @@ class HomepagePageState extends State<HomepagePage> {
                     onPressed: () => Navigator.of(context).push(
                           new MaterialPageRoute(
                             builder: (BuildContext context) => new Ingredients(
-                                  'HOW TO MAKE ' + _data[index].foodname,
+                                  'HOW TO MAKE ' + searchRecipesArrayname[index],
                                   _data[index].stepone,
                                   _data[index].steptwo,
                                   _data[index].stepthree,
@@ -123,6 +123,7 @@ class HomepagePageState extends State<HomepagePage> {
         List tempthree = new List();
         List tempfour = new List();
         List tempfive = new List();
+        
         for (int index = 0; index < _data.length; index++) {
           if (_text
               .toLowerCase()
