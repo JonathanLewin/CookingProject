@@ -17,9 +17,10 @@ class HomepagePageState extends State<HomepagePage> {
   List searchRecipesArraydescription = new List();
   List searchRecipesArrayurl = new List();
   List searchRecipesArraycooking = new List();
+  List searchRecipesArrayingredients = new List();
   List nosuggestion = new List();
 
-  Widget _dialogbuilder(BuildContext context, Data data) {
+  Widget _dialogbuilder(BuildContext context, index) {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
@@ -42,7 +43,7 @@ class HomepagePageState extends State<HomepagePage> {
             Padding(
               padding: new EdgeInsets.all(15.0),
               child: new Text(
-                data.ingredients,
+                searchRecipesArrayingredients[index],
                 textAlign: TextAlign.center,
                 style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14.0),
               ),
@@ -73,23 +74,23 @@ class HomepagePageState extends State<HomepagePage> {
                   ),
                   new FlatButton.icon(
                     icon: new Icon(Icons.restaurant),
-                    // onPressed: () => Navigator.of(context).push(
-                    //       new MaterialPageRoute(
-                    //         builder: (BuildContext context) => new Ingredients(
-                    // 'HOW TO MAKE ' + data.foodname,
-                    // data.stepone,
-                    // data.steptwo,
-                    // data.stepthree,
-                    // data.stepfour,
-                    // data.stepfive,
-                    // data.steponetime,
-                    // data.steptwotime,
-                    // data.stepthreetime,
-                    // data.stepfourtime,
-                    // data.stepfivetime,
-                    //),
-                    //),
-                    //),
+                    onPressed: () => Navigator.of(context).push(
+                          new MaterialPageRoute(
+                            builder: (BuildContext context) => new Ingredients(
+                                  'HOW TO MAKE ' + _data[index].foodname,
+                                  _data[index].stepone,
+                                  _data[index].steptwo,
+                                  _data[index].stepthree,
+                                  _data[index].stepfour,
+                                  _data[index].stepfive,
+                                  _data[index].steponetime,
+                                  _data[index].steptwotime,
+                                  _data[index].stepthreetime,
+                                  _data[index].stepfourtime,
+                                  _data[index].stepfivetime,
+                                ),
+                          ),
+                        ),
                     label: new Text(
                       'Start Cooking! ',
                       style: TextStyle(fontSize: 14.0),
@@ -121,14 +122,18 @@ class HomepagePageState extends State<HomepagePage> {
         List temptwo = new List();
         List tempthree = new List();
         List tempfour = new List();
+        List tempfive = new List();
         for (int index = 0; index < _data.length; index++) {
-          if (_text.toLowerCase() == _data[index].foodname.toLowerCase()) {
+          if (_text
+              .toLowerCase()
+              .contains(_data[index].foodname.toLowerCase())) {
             print(_text);
             //tempthree.add(_data[index].url);
             temp.add(_data[index].foodname);
             temptwo.add(_data[index].fooddescription);
             tempthree.add(_data[index].url);
             tempfour.add(_data[index].cookingtime);
+            tempfive.add(_data[index].ingredients);
             print(searchRecipesArrayname);
             //_filter.clear();
           }
@@ -138,13 +143,15 @@ class HomepagePageState extends State<HomepagePage> {
         searchRecipesArraydescription = temptwo;
         searchRecipesArrayurl = tempthree;
         searchRecipesArraycooking = tempfour;
+        searchRecipesArrayingredients = tempfive;
       }
     }
 
     return new GestureDetector(
       onTap: () => showDialog(
             context: context,
-            builder: (context) => _dialogbuilder(context, _data[index]),
+            builder: (context) =>
+                _dialogbuilder(context, searchRecipesArrayingredients[index]),
           ),
       child: new SingleChildScrollView(
         child: new Container(
@@ -153,8 +160,6 @@ class HomepagePageState extends State<HomepagePage> {
             children: <Widget>[
               new TextField(
                 keyboardType: TextInputType.text,
-                maxLength: null,
-                maxLengthEnforced: false,
                 //autofocus: true,
                 controller: _filter,
                 autocorrect: true,

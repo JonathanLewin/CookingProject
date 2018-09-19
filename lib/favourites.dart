@@ -1,72 +1,106 @@
 import 'package:flutter/material.dart';
 import './sidebarpages.dart';
 
-// class FavouritePage extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return new FavouritePageState();
-//   }
-// }
-
-// //DataClass test;
-// DataClass test = new DataClass();
-// List<Data> _data = test.getList();
-
-// class FavouritePageState extends State<FavouritePage> {
-//   List<Container> gridlist = new List();
-
-//   // DataClass test;
-//   // test = new DataClass();
-//   // List<Data> _data = test.getList();
-
-//   _buildlist() {
-//     for (int i = 0; i < _data.length; i++) {
-//       final listindex = _data[i];
-//       gridlist.add(
-//         new Container(
-//           child: new Text(listindex.foodname),
-//         ),
-//       );
-//     }
-//   }
-
-//   @override
-//   void initstate() {
-//     _buildlist();
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       body: new GridView.count(
-//         crossAxisCount: 2,
-//         children: gridlist,
-//       ),
-//     );
-//   }
-// }
-
 class FavouritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: TheGridView().build(),
+      body: TheGridView().build(context),
     );
   }
 }
 
 class TheGridView {
 
-   Widget makeGridCell(
-      String urltype, String foodnametype, String cookingtimetype) {
+  Widget _dialogbuilder(BuildContext context, Data data) {
 
-    BuildContext context;
-    int index;
     DataClass test;
     test = new DataClass(); 
     List<Data> _data = test.getList();
-    
+    int index = 0;
+
+    return SimpleDialog(
+      children: [
+        new Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding:
+                  new EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
+              child: new Text(
+                'Ingredients you will need: ',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: new EdgeInsets.all(15.0),
+              child: new Text(
+                data.ingredients,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14.0),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Wrap(
+                spacing: 60.0,
+                children: [
+                  new FlatButton.icon(
+                    icon: new Icon(Icons.star),
+                    onPressed: () {},
+                    // Navigator.push(
+                    //       context,
+                    //       new MaterialPageRoute(
+                    //         builder: (BuildContext context) => new HomepagePage(
+                    //               data.url,
+                    //               data.foodname,
+                    //               data.fooddescription,
+                    //               data.cookingtime,
+                    //             ),
+                    //       ),
+                    //     ),
+                    label: new Text(
+                      'Save me ',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                  new FlatButton.icon(
+                    icon: new Icon(Icons.restaurant),
+                    // onPressed: () => Navigator.of(context).push(
+                    //       new MaterialPageRoute(
+                    //         builder: (BuildContext context) => new Ingredients(
+                    //               'HOW TO MAKE ' + data.foodname,
+                    //               data.stepone,
+                    //               data.steptwo,
+                    //               data.stepthree,
+                    //               data.stepfour,
+                    //               data.stepfive,
+                    //               data.steponetime,
+                    //               data.steptwotime,
+                    //               data.stepthreetime,
+                    //               data.stepfourtime,
+                    //               data.stepfivetime,
+                    //             ),
+                    //       ),
+                    //     ),
+                    label: new Text(
+                      'Start Cooking! ',
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+   Widget makeGridCell(
+      String urltype, String foodnametype, String cookingtimetype) {
+
     return new Card(
       elevation: 7.0,
       child: Column(
@@ -91,13 +125,19 @@ class TheGridView {
     );
   }
 
-  GridView build() {
+  Widget build(BuildContext context) {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
     int index = 0;
 
-    return GridView.count(
+    return new GestureDetector(
+      onTap: () => showDialog(
+            context: context,
+            builder: (context) => _dialogbuilder(context, _data[index]),
+          ),
+
+    child: GridView.count(
       primary: true,
       padding: EdgeInsets.all(16.0),
       crossAxisCount: 2,
@@ -105,13 +145,22 @@ class TheGridView {
       mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,
       children: <Widget>[
-        makeGridCell(_data[0].url, _data[0].foodname, _data[0].cookingtime),
-        makeGridCell(_data[1].url, _data[1].foodname, _data[1].cookingtime),
+        makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),
+        makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),
         makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
         makeGridCell(_data[0].url, _data[0].foodname, _data[0].cookingtime),
         makeGridCell(_data[1].url, _data[1].foodname, _data[1].cookingtime),
         makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
       ],
+    ),
     );
   }
 }
+
+
+// makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),
+//         makeGridCell(_data[index].url, _data[index+1].foodname, _data[index+1].cookingtime),
+//         makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
+//         makeGridCell(_data[0].url, _data[0].foodname, _data[0].cookingtime),
+//         makeGridCell(_data[1].url, _data[1].foodname, _data[1].cookingtime),
+//         makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
