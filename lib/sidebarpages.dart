@@ -12,6 +12,7 @@ class Data {
       this.ingredients,
       this.alergies,
       this.difficulty,
+      this.extradetails,
       this.stepone,
       this.steptwo,
       this.stepthree,
@@ -31,6 +32,7 @@ class Data {
   final String ingredients;
   final String alergies;
   final String difficulty;
+  final String extradetails;
   final String stepone;
   final String steptwo;
   final String stepthree;
@@ -54,6 +56,7 @@ class DataClass {
         cookingtime: '25mins',
         alergies: 'DIARY FREE, GLUTEN FREE',
         difficulty: 'LOW',
+        extradetails: 'HIGH CARBS, MEDIUM FAT, LOW PROTEIN',
         ingredients:
             'Spaghetti, 1 clove of Garlic, double wipped cream, diced bacon, mushrooms, mixed herbs',
         stepone:
@@ -81,6 +84,7 @@ class DataClass {
             'Jasmine Rice, eggs, sliced up pork/chicken/tofu, range of chopped up vegetables, seasoning',
         alergies: 'GLUTEN FREE, VEGAN',
         difficulty: 'MEDIUM',
+        extradetails: 'HEALTHY, LOW FAT, MEDIUM PROTEIN',
         stepone:
             'Boil spaghetti for 9mins and while that is cooking, pre heat another frying pan and slice up some mushroom',
         steptwo:
@@ -107,6 +111,7 @@ class DataClass {
             'Jasmine Rice, chicken breast, flour, breadcrums, eggs, chicken stock, curry suace',
         alergies: 'VEGETARIAN',
         difficulty: 'MEDIUM',
+        extradetails: 'HIGH PROTEIN, MEDIUM FAT, MEDIUM CARBS',
         stepone:
             'Wash rice and put it in the rice cooker. Prepare two cracked eggs, three tablespoons of flour and breadcrums on separate plates, ',
         steptwo:
@@ -223,13 +228,13 @@ class PageOne extends StatelessWidget {
 
     return new AlertDialog(
       content: new Container(
-        width: 300.0,
-        height: 200.0,
+        width: 360.0,
+        height: 250.0,
         decoration: new BoxDecoration(
           color: Colors.white,
           shape: BoxShape.rectangle,
           border: Border.all(color: Colors.deepOrange),
-          borderRadius: new BorderRadius.all(new Radius.circular(15.0)),
+          borderRadius: new BorderRadius.all(new Radius.circular(13.0)),
         ),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -245,30 +250,78 @@ class PageOne extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                new IconButton(icon: new Icon(Icons.note), iconSize: 30.0, color: Colors.greenAccent, onPressed: () {}),
+                new IconButton(
+                    icon: new Icon(Icons.note),
+                    iconSize: 30.0,
+                    color: Colors.greenAccent,
+                    onPressed: () {}),
                 new Text(
-                data.alergies,
-                textAlign: TextAlign.start,
-                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16.0, color: Colors.green, fontWeight: FontWeight.bold),
-              ),
+                  data.alergies,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14.0,
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
             new Container(
               height: 1.0,
-              width: 230.0,
+              width: 250.0,
               color: Colors.brown,
-              margin: const EdgeInsets.all(3.0),
+              //margin: const EdgeInsets.all(2.0),
             ),
             Row(
               children: <Widget>[
-                new IconButton(icon: new Icon(Icons.warning), iconSize: 30.0, color: Colors.yellowAccent, onPressed: () {}),
+                new IconButton(
+                    icon: new Icon(Icons.warning),
+                    iconSize: 30.0,
+                    color: Colors.yellowAccent,
+                    onPressed: () {}),
                 new Text(
-                'DIFFICULTY: ',
-                textAlign: TextAlign.start,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.black),
-              ),
-                new Text('  ' + data.difficulty, style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.orange))
+                  'DIFFICULTY: ',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                      color: Colors.black),
+                ),
+                new Text('  ' + data.difficulty,
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange))
               ],
+            ),
+            new Container(
+              height: 1.0,
+              width: 250.0,
+              color: Colors.brown,
+              //margin: const EdgeInsets.all(2.0),
+            ),
+            Container(
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new IconButton(
+                      icon: new Icon(Icons.local_offer),
+                      iconSize: 30.0,
+                      color: Colors.blue,
+                      onPressed: () {}),
+                  new Padding(
+                      padding: new EdgeInsets.symmetric(horizontal: 20.0),
+                      child: new Text(data.extradetails,
+                      textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontSize: 11.75,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue)),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
