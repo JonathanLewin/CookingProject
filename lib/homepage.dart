@@ -129,14 +129,14 @@ class HomepagePageState extends State<HomepagePage> {
               .toLowerCase()
               .contains(_data[index].foodname.toLowerCase())) {
             print(_text);
-            //tempthree.add(_data[index].url);
+
             temp.add(_data[index].foodname);
             temptwo.add(_data[index].fooddescription);
             tempthree.add(_data[index].url);
             tempfour.add(_data[index].cookingtime);
             tempfive.add(_data[index].ingredients);
             print(searchRecipesArrayname);
-            //_filter.clear();
+
           }
           _filter.clear();
         }

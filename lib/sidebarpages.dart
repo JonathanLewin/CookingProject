@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import './main.dart';
 import './ingredientspage.dart';
-import './homepage.dart';
 
 class Data {
   const Data(
@@ -128,7 +126,6 @@ class DataClass {
 
 class PageOne extends StatelessWidget {
   int index = 0;
-  //int counter = 0;
   final String pagetext;
 
   PageOne(this.pagetext);
@@ -217,6 +214,7 @@ class PageOne extends StatelessWidget {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
+    var oi = 'nxjd';
 
     int counter = _data.length;
 
@@ -234,13 +232,25 @@ class PageOne extends StatelessWidget {
                 new Image.asset(_data[index].url,
                     fit: BoxFit.cover, height: 200.0, width: 370.0),
                 new SizedBox(height: 8.0),
-                new Text(_data[index].foodname,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic)),
-                new SizedBox(height: 8.0),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new SizedBox(width: 70.0),
+                    new Text(_data[index].foodname,
+                        style: new TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic)),
+                    new SizedBox(width: 20.0),
+                    new IconButton(
+                      icon: new Icon(Icons.info, size: 20.0),
+                      onPressed: () {},
+                      color: Colors.deepOrange,
+                      alignment: Alignment.centerRight
+                    ),
+                  ],
+                ),
+                //new SizedBox(height: 8.0),
                 new Text(_data[index].fooddescription,
                     textAlign: TextAlign.center,
                     style: new TextStyle(
@@ -277,10 +287,6 @@ class PageOne extends StatelessWidget {
         backgroundColor: Colors.deepOrange,
         title: new Text(pagetext),
       ),
-      // body: StreamBuilder(
-      //     stream: Firestore.instance.collection('foodname').snapshots(),
-      //     builder: (context, snapshot) {
-      //       if (!snapshot.hasData) return const Text('');
       body: ListView.builder(
         itemCount: _data.length,
         itemBuilder: _listItemBuilder,
@@ -288,14 +294,3 @@ class PageOne extends StatelessWidget {
     );
   }
 }
-
-//String name = documents[index].data['name'].toString();
-//String cookingtime = documents[index].data['cookingtime'].toString();
-//String description = documents[index].data['description'].toString();
-
-// return ListView.builder(
-//               itemCount: snapshot.data.documents.length,
-//               itemBuilder: (context, index) =>
-//                   _listItemBuilder(context, snapshot.data.documents[index]),
-//             );
-//           }),
