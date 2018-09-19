@@ -10,7 +10,8 @@ class Data {
       this.fooddescription,
       this.cookingtime,
       this.ingredients,
-      this.glutenfree,
+      this.alergies,
+      this.difficulty,
       this.stepone,
       this.steptwo,
       this.stepthree,
@@ -28,7 +29,8 @@ class Data {
   final String fooddescription;
   final String cookingtime;
   final String ingredients;
-  final String glutenfree;
+  final String alergies;
+  final String difficulty;
   final String stepone;
   final String steptwo;
   final String stepthree;
@@ -50,7 +52,8 @@ class DataClass {
         fooddescription:
             'Deleicious pasta seasoned with a creamy sauce filled with bacon and herbs',
         cookingtime: '25mins',
-        glutenfree: 'GF',
+        alergies: 'DIARY FREE, GLUTEN FREE',
+        difficulty: 'LOW',
         ingredients:
             'Spaghetti, 1 clove of Garlic, double wipped cream, diced bacon, mushrooms, mixed herbs',
         stepone:
@@ -76,7 +79,8 @@ class DataClass {
         cookingtime: '40mins',
         ingredients:
             'Jasmine Rice, eggs, sliced up pork/chicken/tofu, range of chopped up vegetables, seasoning',
-        glutenfree: '',
+        alergies: 'GLUTEN FREE, VEGAN',
+        difficulty: 'MEDIUM',
         stepone:
             'Boil spaghetti for 9mins and while that is cooking, pre heat another frying pan and slice up some mushroom',
         steptwo:
@@ -101,7 +105,8 @@ class DataClass {
         cookingtime: '1hr',
         ingredients:
             'Jasmine Rice, chicken breast, flour, breadcrums, eggs, chicken stock, curry suace',
-        glutenfree: 'GF',
+        alergies: 'VEGETARIAN',
+        difficulty: 'MEDIUM',
         stepone:
             'Wash rice and put it in the rice cooker. Prepare two cracked eggs, three tablespoons of flour and breadcrums on separate plates, ',
         steptwo:
@@ -210,6 +215,67 @@ class PageOne extends StatelessWidget {
     );
   }
 
+  Widget _dialogbuildericon(BuildContext context, Data data) {
+    DataClass test;
+    test = new DataClass();
+    List<Data> _data = test.getList();
+    int index = 0;
+
+    return new AlertDialog(
+      content: new Container(
+        width: 300.0,
+        height: 200.0,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          border: Border.all(color: Colors.deepOrange),
+          borderRadius: new BorderRadius.all(new Radius.circular(15.0)),
+        ),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  new EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: new Text(
+                'Dietary Requirements: ',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                new IconButton(icon: new Icon(Icons.note), iconSize: 30.0, color: Colors.greenAccent, onPressed: () {}),
+                new Text(
+                data.alergies,
+                textAlign: TextAlign.start,
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16.0, color: Colors.green, fontWeight: FontWeight.bold),
+              ),
+              ],
+            ),
+            new Container(
+              height: 1.0,
+              width: 230.0,
+              color: Colors.brown,
+              margin: const EdgeInsets.all(3.0),
+            ),
+            Row(
+              children: <Widget>[
+                new IconButton(icon: new Icon(Icons.warning), iconSize: 30.0, color: Colors.yellowAccent, onPressed: () {}),
+                new Text(
+                'DIFFICULTY: ',
+                textAlign: TextAlign.start,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.black),
+              ),
+                new Text('  ' + data.difficulty, style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.orange))
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _listItemBuilder(BuildContext context, int index) {
     DataClass test;
     test = new DataClass();
@@ -243,11 +309,14 @@ class PageOne extends StatelessWidget {
                             fontStyle: FontStyle.italic)),
                     new SizedBox(width: 20.0),
                     new IconButton(
-                      icon: new Icon(Icons.info, size: 20.0),
-                      onPressed: () {},
-                      color: Colors.deepOrange,
-                      alignment: Alignment.centerRight
-                    ),
+                        icon: new Icon(Icons.info, size: 20.0),
+                        onPressed: () => showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  _dialogbuildericon(context, _data[index]),
+                            ),
+                        color: Colors.deepOrange,
+                        alignment: Alignment.centerRight),
                   ],
                 ),
                 //new SizedBox(height: 8.0),
