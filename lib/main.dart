@@ -61,13 +61,13 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
         child: new ListView(
           children: <Widget>[
             new UserAccountsDrawerHeader(
-              accountName: new Text("Different types of Recipes"),
-              accountEmail: new Text("Choose:"),
+              accountEmail: new Text("Different types of Recipes"),
+              //accountEmail: new Text("Choose:"),
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   fit: BoxFit.fill,
-                  image: new NetworkImage(
-                      "https://images.britcdn.com/wp-content/uploads/2017/01/22602-645x408.jpg?w=1000&auto=format"),
+                  image: new AssetImage(
+                      "assets/sidebar.jpg"),
                 ),
               ),
             ),

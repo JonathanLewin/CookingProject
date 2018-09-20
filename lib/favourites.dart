@@ -4,18 +4,24 @@ import './sidebarpages.dart';
 class FavouritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    DataClass test;
+    test = new DataClass();
+    List<Data> _data = test.getList();
+
     return new Scaffold(
-      body: TheGridView().build(context),
+      body: _build(context),
+    //   ListView.builder(
+    //     itemCount: _data.length,
+    //     itemBuilder: _build,
+    // ),
     );
   }
 }
 
-class TheGridView {
-
   Widget _dialogbuilder(BuildContext context, Data data) {
-
     DataClass test;
-    test = new DataClass(); 
+    test = new DataClass();
     List<Data> _data = test.getList();
     int index = 0;
 
@@ -98,9 +104,8 @@ class TheGridView {
     );
   }
 
-   Widget makeGridCell(
+  Widget makeGridCell(
       String urltype, String foodnametype, String cookingtimetype) {
-
     return new Card(
       elevation: 7.0,
       child: Column(
@@ -125,37 +130,38 @@ class TheGridView {
     );
   }
 
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
     int index = 0;
+    //for (index = 0; index < _data.length; index++) {
+      return new GestureDetector(
+        onTap: () => showDialog(
+              context: context,
+              builder: (context) => _dialogbuilder(context, _data[index]),
+            ),
+        child: GridView.count(
+          primary: true,
+          padding: EdgeInsets.all(12.0),
+          crossAxisCount: 2,
+          childAspectRatio: 0.92,
+          mainAxisSpacing: 5.0,
+          crossAxisSpacing: 5.0,
+          children: <Widget>[
+            makeGridCell(_data[index].url, _data[index].foodname,
+                _data[index].cookingtime),
+            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
+            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
+            makeGridCell(_data[index = index-2].url, _data[index].foodname, _data[index].cookingtime),
+            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
+            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
 
-    return new GestureDetector(
-      onTap: () => showDialog(
-            context: context,
-            builder: (context) => _dialogbuilder(context, _data[index]),
-          ),
-
-    child: GridView.count(
-      primary: true,
-      padding: EdgeInsets.all(16.0),
-      crossAxisCount: 2,
-      childAspectRatio: 0.92,
-      mainAxisSpacing: 10.0,
-      crossAxisSpacing: 10.0,
-      children: <Widget>[
-        makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),
-        makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),
-        makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
-        makeGridCell(_data[0].url, _data[0].foodname, _data[0].cookingtime),
-        makeGridCell(_data[1].url, _data[1].foodname, _data[1].cookingtime),
-        makeGridCell(_data[2].url, _data[2].foodname, _data[2].cookingtime),
-      ],
-    ),
-    );
-  }
-}
+          ],
+        ),
+      );
+    }
+  //}
 
 
 // makeGridCell(_data[index].url, _data[index].foodname, _data[index].cookingtime),

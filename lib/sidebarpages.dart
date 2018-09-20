@@ -333,9 +333,6 @@ class PageOne extends StatelessWidget {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
-    var oi = 'nxjd';
-
-    int counter = _data.length;
 
     return new GestureDetector(
       onTap: () => showDialog(
