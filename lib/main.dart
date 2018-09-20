@@ -26,7 +26,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = new TabController(vsync: this, length: 2);
+    controller = new TabController(vsync: this, length: 3);
   }
 
   @override
@@ -51,7 +51,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
         bottom: new TabBar(
           controller: controller,
           tabs: <Tab>[
-            //new Tab(child: new Text('Popular', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))),
+            new Tab(child: new Text('Popular', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))),
             new Tab(icon: new Icon(Icons.home)),
             new Tab(child: new Text('Our Favourites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
             ),],
@@ -72,20 +72,44 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
               ),
             ),
             new ListTile(
-              title: new Text("Recipes Under £5"),
+              title: new Text("Recipes Under £10"),
               trailing: new Icon(Icons.arrow_right),
               onTap: () => Navigator.of(context).push(
                     new MaterialPageRoute(
                       builder: (BuildContext context) => new PageOne(
-                          'RECIPIES UNDER £5'
+                          'RECIPIES UNDER £10'
                           ),),),
             ),
             new ListTile(
-              title: new Text("Asain Recipes: Quick, Tasty and Affordable"),
+              title: new Text("Low Calorie Recipes"),
               trailing: new Icon(Icons.arrow_right),
               onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                   builder: (BuildContext context) => new PageOne(
-                      'AUTHENTIC ASAIN DISHES'
+                      'LOW CALORIE RECIPES'
+                      ))),
+            ),
+            new ListTile(
+              title: new Text("Quick Recipes"),
+              trailing: new Icon(Icons.arrow_right),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new PageOne(
+                      'QUICK RECIPES'
+                      ))),
+            ),
+            new ListTile(
+              title: new Text("Easy to Cook Recipes"),
+              trailing: new Icon(Icons.arrow_right),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new PageOne(
+                      'QUICK RECIPES'
+                      ))),
+            ),
+            new ListTile(
+              title: new Text("Special Occasion Recipes"),
+              trailing: new Icon(Icons.arrow_right),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new PageOne(
+                      'QUICK RECIPES'
                       ))),
             ),
             new ListTile(
@@ -115,7 +139,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
       body: new TabBarView(
         controller: controller,
         children: <Widget>[
-          //new popular.PopularPage(),
+          new popular.PopularPage(),
           new homepage.HomepagePage(),
           new favourite.FavouritePage(),
         ],

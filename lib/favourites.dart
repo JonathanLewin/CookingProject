@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './sidebarpages.dart';
+import './ingredientspage.dart';
 
 class FavouritePage extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class FavouritePage extends StatelessWidget {
     DataClass test;
     test = new DataClass();
     List<Data> _data = test.getList();
-    int index = 0;
+    //int index = 0;
 
     return SimpleDialog(
       children: [
@@ -104,8 +105,14 @@ class FavouritePage extends StatelessWidget {
     );
   }
 
-  Widget makeGridCell(
-      String urltype, String foodnametype, String cookingtimetype) {
+  Widget makeGridCell() {
+
+    DataClass test;
+    test = new DataClass();
+    List<Data> _data = test.getList();
+    int index;
+
+    for(index = 0; index < _data.length; index++){
     return new Card(
       elevation: 7.0,
       child: Column(
@@ -113,21 +120,22 @@ class FavouritePage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
-          new Image.asset(urltype,
+          new Image.asset(_data[index].url,
               fit: BoxFit.cover, height: 140.0, width: 150.0),
           new SizedBox(height: 6.0),
-          new Text(foodnametype,
+          new Text(_data[index].foodname,
               textAlign: TextAlign.center,
               style:
                   new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
           new SizedBox(height: 3.0),
-          new Text('Cooking Time: ' + cookingtimetype,
+          new Text('Cooking Time: ' + _data[index].cookingtime,
               textAlign: TextAlign.center,
               style:
                   new TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic)),
         ],
       ),
     );
+  }
   }
 
   Widget _build(BuildContext context) {
@@ -149,14 +157,8 @@ class FavouritePage extends StatelessWidget {
           mainAxisSpacing: 5.0,
           crossAxisSpacing: 5.0,
           children: <Widget>[
-            makeGridCell(_data[index].url, _data[index].foodname,
-                _data[index].cookingtime),
-            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
-            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
-            makeGridCell(_data[index = index-2].url, _data[index].foodname, _data[index].cookingtime),
-            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
-            makeGridCell(_data[index = index+1].url, _data[index].foodname, _data[index].cookingtime),
-
+            makeGridCell(),
+            //index = 0,
           ],
         ),
       );
