@@ -26,7 +26,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = new TabController(vsync: this, length: 3);
+    controller = new TabController(vsync: this, length: 2);
   }
 
   @override
@@ -51,7 +51,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
         bottom: new TabBar(
           controller: controller,
           tabs: <Tab>[
-            new Tab(child: new Text('Popular', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))),
+            //new Tab(child: new Text('Popular', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))),
             new Tab(icon: new Icon(Icons.home)),
             new Tab(child: new Text('Our Favourites', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
             ),],
@@ -115,7 +115,7 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
       body: new TabBarView(
         controller: controller,
         children: <Widget>[
-          new popular.PopularPage(),
+          //new popular.PopularPage(),
           new homepage.HomepagePage(),
           new favourite.FavouritePage(),
         ],
