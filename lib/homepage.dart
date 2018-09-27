@@ -125,9 +125,7 @@ class HomepagePageState extends State<HomepagePage> {
         List tempfive = new List();
         
         for (int index = 0; index < _data.length; index++) {
-          if (_text
-              .toLowerCase()
-              .contains(_data[index].foodname.toLowerCase())) {
+          if (_data[index].foodname.toLowerCase().contains(_text.toLowerCase())) {
             print(_text);
 
             temp.add(_data[index].foodname);

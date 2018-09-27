@@ -232,33 +232,33 @@ class PopularPageState extends State<PopularPage> {
       }
     }
 
-    // void action() {
-    //   if (_data[index].cookingtime <= timeone) {
-    //     List temp = new List();
-    //     for (int index = 0; index < _data.length; index++) {
-    //       temp.add(_data[index].cookingtime);
-    //     }
-    //     searchRecipesArraycookingtime = temp;
-    //   } else if (_data[index].cookingtime <= timetwo) {
-    //     List temptwo = new List();
-    //     for (int index = 0; index < _data.length; index++) {
-    //       temptwo.add(_data[index].cookingtime);
-    //     }
-    //     searchRecipesArraycookingtime = temptwo;
-    //   } else if (_data[index].cookingtime <= timethree) {
-    //     List tempthree = new List();
-    //     for (int index = 0; index < _data.length; index++) {
-    //       tempthree.add(_data[index].cookingtime);
-    //     }
-    //     searchRecipesArraycookingtime = tempthree;
-    //   } else if (_data[index].cookingtime >= timefour) {
-    //     List tempfour = new List();
-    //     for (int index = 0; index < _data.length; index++) {
-    //       tempfour.add(_data[index].cookingtime);
-    //     }
-    //     searchRecipesArraycookingtime = tempfour;
-    //   }
-    // }
+    void action() {
+      if (_data[index].cookingtime <= timeone) {
+        List temp = new List();
+        for (int index = 0; index < _data.length; index++) {
+          temp.add(_data[index].cookingtime.toString());
+        }
+        searchRecipesArraycookingtime = temp;
+      } else if (_data[index].cookingtime <= timetwo) {
+        List temptwo = new List();
+        for (int index = 0; index < _data.length; index++) {
+          temptwo.add(_data[index].cookingtime.toString());
+        }
+        searchRecipesArraycookingtime = temptwo;
+      } else if (_data[index].cookingtime <= timethree) {
+        List tempthree = new List();
+        for (int index = 0; index < _data.length; index++) {
+          tempthree.add(_data[index].cookingtime.toString());
+        }
+        searchRecipesArraycookingtime = tempthree;
+      } else if (_data[index].cookingtime >= timefour) {
+        List tempfour = new List();
+        for (int index = 0; index < _data.length; index++) {
+          tempfour.add(_data[index].cookingtime.toString());
+        }
+        searchRecipesArraycookingtime = tempfour;
+      }
+    }
 
     return new Container(
       padding: new EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
@@ -301,7 +301,7 @@ class PopularPageState extends State<PopularPage> {
             elevation: 4.0,
             onPressed: () {
               setState(() {
-                //action();
+                action();
               });
             },
           ),
