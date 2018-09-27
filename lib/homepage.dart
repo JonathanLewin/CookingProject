@@ -133,7 +133,7 @@ class HomepagePageState extends State<HomepagePage> {
             temp.add(_data[index].foodname);
             temptwo.add(_data[index].fooddescription);
             tempthree.add(_data[index].url);
-            tempfour.add(_data[index].cookingtime);
+            tempfour.add(_data[index].cookingtime.toString());
             tempfive.add(_data[index].ingredients);
             print(searchRecipesArrayname);
 
@@ -222,7 +222,7 @@ class HomepagePageState extends State<HomepagePage> {
                                 children: [
                                   new Text(
                                     'Cooking Time: ' +
-                                        searchRecipesArraycooking[index],
+                                        searchRecipesArraycooking[index].toString() + 'mins',
                                     style:
                                         TextStyle(fontStyle: FontStyle.italic),
                                   ),

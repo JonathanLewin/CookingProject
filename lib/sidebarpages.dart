@@ -28,7 +28,7 @@ class Data {
   final String url;
   final String foodname;
   final String fooddescription;
-  final String cookingtime;
+  final int cookingtime;
   final String ingredients;
   final String alergies;
   final String difficulty;
@@ -53,9 +53,9 @@ class DataClass {
         foodname: 'Pasta Carbonara',
         fooddescription:
             'Deleicious pasta seasoned with a creamy sauce filled with bacon and herbs',
-        cookingtime: '25mins',
+        cookingtime: 25,
         alergies: 'DIARY FREE, GLUTEN FREE',
-        difficulty: 'LOW',
+        difficulty: 'Very Easy',
         extradetails: 'HIGH CARBS, MEDIUM FAT, LOW PROTEIN',
         ingredients:
             'Spaghetti, 1 clove of Garlic, double wipped cream, diced bacon, mushrooms, mixed herbs',
@@ -79,7 +79,7 @@ class DataClass {
         url: 'assets/bibimbap.jpg',
         foodname: 'Bibimbap',
         fooddescription: 'Lots of vegetables',
-        cookingtime: '40mins',
+        cookingtime: 40,
         ingredients:
             'Jasmine Rice, eggs, sliced up pork/chicken/tofu, range of chopped up vegetables, seasoning',
         alergies: 'GLUTEN FREE, VEGAN',
@@ -106,7 +106,7 @@ class DataClass {
         foodname: 'Katsu Curry',
         fooddescription:
             'An authentic asain dish that consists of crispy breaded chicken covered in curry suace',
-        cookingtime: '1hr',
+        cookingtime: 60,
         ingredients:
             'Jasmine Rice, chicken breast, flour, breadcrums, eggs, chicken stock, curry suace',
         alergies: 'VEGETARIAN',
@@ -381,7 +381,7 @@ class PageOne extends StatelessWidget {
                     spacing: 20.0,
                     children: [
                       new Text(
-                        'Cooking Time: ' + _data[index].cookingtime,
+                        'Cooking Time: ' + _data[index].cookingtime.toString(),
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ],

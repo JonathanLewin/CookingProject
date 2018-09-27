@@ -128,7 +128,7 @@ class FavouritePage extends StatelessWidget {
               style:
                   new TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
           new SizedBox(height: 3.0),
-          new Text('Cooking Time: ' + _data[index].cookingtime,
+          new Text('Cooking Time: ' + _data[index].cookingtime.toString(),
               textAlign: TextAlign.center,
               style:
                   new TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic)),
