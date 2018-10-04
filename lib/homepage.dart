@@ -125,7 +125,7 @@ class HomepagePageState extends State<HomepagePage> {
         List tempfive = new List();
         
         for (int index = 0; index < _data.length; index++) {
-          if (_data[index].foodname.toLowerCase().contains(_text.toLowerCase())) {
+          if (_data[index].foodname.toLowerCase().startsWith(_text.toLowerCase()) || _data[index].foodname.toLowerCase().contains(_text.toLowerCase())) {
             print(_text);
 
             temp.add(_data[index].foodname);
@@ -191,6 +191,7 @@ class HomepagePageState extends State<HomepagePage> {
                       : searchRecipesArrayname.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
+                    //searchRecipesArrayname.sort();
                     return new SingleChildScrollView(
                       child: new Container(
                         padding: new EdgeInsets.symmetric(

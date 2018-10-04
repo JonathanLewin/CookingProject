@@ -61,8 +61,8 @@ class CoolAppState extends State<CoolApp> with SingleTickerProviderStateMixin {
         child: new ListView(
           children: <Widget>[
             new UserAccountsDrawerHeader(
-              accountEmail: new Text("Different types of Recipes"),
-              //accountEmail: new Text("Choose:"),
+              accountName: new Text("Different types of Recipes"),
+              accountEmail: new Text("Choose:"),
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   fit: BoxFit.fill,

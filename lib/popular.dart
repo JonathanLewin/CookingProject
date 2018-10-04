@@ -97,6 +97,9 @@ class PopularPageState extends State<PopularPage> {
   int timethree = 50;
   int timefour = 51;
   List searchRecipesArraycookingtime = new List();
+  List searchRecipesArrayfooddescription = new List();
+  List searchRecipesArrayname = new List();
+  List searchRecipesArrayurl = new List();
 
   void onChangeddifficulty(double value) {
     setState(() {
@@ -233,30 +236,54 @@ class PopularPageState extends State<PopularPage> {
     }
 
     void action() {
-      if (_data[index].cookingtime <= timeone) {
-        List temp = new List();
+      List temp = new List();
+      List temptwo = new List();
+      List tempthree = new List();
+      List tempfour = new List();
+      if (_data[index].cookingtime <= _time.toInt() && _time == 10){
         for (int index = 0; index < _data.length; index++) {
           temp.add(_data[index].cookingtime.toString());
+          temptwo.add(_data[index].fooddescription);
+          tempthree.add(_data[index].foodname);
+          tempfour.add(_data[index].url);
         }
         searchRecipesArraycookingtime = temp;
-      } else if (_data[index].cookingtime <= timetwo) {
-        List temptwo = new List();
+        searchRecipesArrayfooddescription = temptwo;
+        searchRecipesArrayname = tempthree;
+        searchRecipesArrayurl = tempfour;
+      } else if (_data[index].cookingtime <= _time.toInt() && _time == 25) {
         for (int index = 0; index < _data.length; index++) {
-          temptwo.add(_data[index].cookingtime.toString());
+          temp.add(_data[index].cookingtime.toString());
+          temptwo.add(_data[index].fooddescription);
+          tempthree.add(_data[index].foodname);
+          tempfour.add(_data[index].url);
         }
-        searchRecipesArraycookingtime = temptwo;
-      } else if (_data[index].cookingtime <= timethree) {
-        List tempthree = new List();
+        searchRecipesArraycookingtime = temp;
+        searchRecipesArrayfooddescription = temptwo;
+        searchRecipesArrayname = tempthree;
+        searchRecipesArrayurl = tempfour;
+      } else if (_data[index].cookingtime <= _time.toInt() && _time == 50) {
         for (int index = 0; index < _data.length; index++) {
-          tempthree.add(_data[index].cookingtime.toString());
+          temp.add(_data[index].cookingtime.toString());
+          temptwo.add(_data[index].fooddescription);
+          tempthree.add(_data[index].foodname);
+          tempfour.add(_data[index].url);
         }
-        searchRecipesArraycookingtime = tempthree;
-      } else if (_data[index].cookingtime >= timefour) {
-        List tempfour = new List();
+        searchRecipesArraycookingtime = temp;
+        searchRecipesArrayfooddescription = temptwo;
+        searchRecipesArrayname = tempthree;
+        searchRecipesArrayurl = tempfour;
+      } else if (_data[index].cookingtime >= _time.toInt() && _time == 51) {
         for (int index = 0; index < _data.length; index++) {
-          tempfour.add(_data[index].cookingtime.toString());
+          temp.add(_data[index].cookingtime.toString());
+          temptwo.add(_data[index].fooddescription);
+          tempthree.add(_data[index].foodname);
+          tempfour.add(_data[index].url);
         }
-        searchRecipesArraycookingtime = tempfour;
+        searchRecipesArraycookingtime = temp;
+        searchRecipesArrayfooddescription = temptwo;
+        searchRecipesArrayname = tempthree;
+        searchRecipesArrayurl = tempfour;
       }
     }
 
@@ -306,43 +333,44 @@ class PopularPageState extends State<PopularPage> {
             },
           ),
           // new ListView.builder(
+          //   itemCount: searchRecipesArrayname[index] ? 0 : searchRecipesArrayname.length,
           //     shrinkWrap: true,
           //     itemBuilder: (context, index) {
-                // new Container(
-                //   child: new Column(
-                //     children: <Widget>[
-                //       new Image.asset(_data[index].url,
-                //           fit: BoxFit.cover, height: 200.0, width: 370.0),
-                //       new SizedBox(height: 8.0),
-                //       new Text(_data[index].foodname,
-                //           textAlign: TextAlign.center,
-                //           style: new TextStyle(
-                //               fontSize: 20.0,
-                //               fontWeight: FontWeight.bold,
-                //               fontStyle: FontStyle.italic)),
-                //       new SizedBox(height: 8.0),
-                //       new Text(_data[index].fooddescription,
-                //           textAlign: TextAlign.center,
-                //           style: new TextStyle(
-                //               fontSize: 14.0, fontStyle: FontStyle.italic)),
-                //       new SizedBox(height: 8.0),
-                //       Align(
-                //         alignment: Alignment.center,
-                //         child: Wrap(
-                //           spacing: 20.0,
-                //           children: [
-                //             new Text(
-                //               'Cooking Time: ' +
-                //                   searchRecipesArraycookingtime.toString(),
-                //               style: TextStyle(fontStyle: FontStyle.italic),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // );
-              // }),
+          //       new Container(
+          //         child: new Column(
+          //           children: <Widget>[
+          //             new Image.asset(searchRecipesArrayurl[index],
+          //                 fit: BoxFit.cover, height: 200.0, width: 370.0),
+          //             new SizedBox(height: 8.0),
+          //             new Text(searchRecipesArrayname[index],
+          //                 textAlign: TextAlign.center,
+          //                 style: new TextStyle(
+          //                     fontSize: 20.0,
+          //                     fontWeight: FontWeight.bold,
+          //                     fontStyle: FontStyle.italic)),
+          //             new SizedBox(height: 8.0),
+          //             new Text(searchRecipesArrayfooddescription[index],
+          //                 textAlign: TextAlign.center,
+          //                 style: new TextStyle(
+          //                     fontSize: 14.0, fontStyle: FontStyle.italic)),
+          //             new SizedBox(height: 8.0),
+          //             Align(
+          //               alignment: Alignment.center,
+          //               child: Wrap(
+          //                 spacing: 20.0,
+          //                 children: [
+          //                   new Text(
+          //                     'Cooking Time: ' +
+          //                         searchRecipesArraycookingtime.toString(),
+          //                     style: TextStyle(fontStyle: FontStyle.italic),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     }),
         ],
       ),
     );
